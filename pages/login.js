@@ -17,13 +17,6 @@ import { observer } from "mobx-react";
 
 @observer
 export class Login extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    errors: {},
-    from: ""
-  };
-
   componentDidMount() {
     if (localStorage.jwtToken) {
       const decoded = jwt_decode(localStorage.jwtToken);
@@ -36,7 +29,8 @@ export class Login extends React.Component {
       }
     }
     if (UserStore.isAuth) {
-      Router.pushRoute("/");
+      //Router.pushRoute("/");
+      Router.replace("/");
     }
   }
 
@@ -53,9 +47,12 @@ export class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const data = new FormData(e.target);
+    const email = data.get("email");
+    const password = data.get("password");
     const user = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password
     };
     let redirPath = "/";
     if (
@@ -63,6 +60,7 @@ export class Login extends React.Component {
     ) {
       redirPath = this.props.location.state.from.pathname;
     }
+    console.log(redirPath);
     UserStore.loginUser(user, redirPath);
   };
 
@@ -108,13 +106,7 @@ export class Login extends React.Component {
                     }
                   >
                     <label>Email</label>
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      name="email"
-                      onChange={this.handleInputChange}
-                      value={this.state.email}
-                    />
+                    <input type="email" placeholder="Email" name="email" />
                   </Form.Field>
                   <Form.Field
                     error={
@@ -128,8 +120,6 @@ export class Login extends React.Component {
                       type="password"
                       placeholder="Password"
                       name="password"
-                      onChange={this.handleInputChange}
-                      value={this.state.password}
                     />
                   </Form.Field>
                   <Button type="submit">Login</Button>

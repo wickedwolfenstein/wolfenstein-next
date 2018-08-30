@@ -218,7 +218,6 @@ export class Banner2 extends Component {
   }
 
   render() {
-    console.log(Store);
     return (
       <Fragment>
         <div

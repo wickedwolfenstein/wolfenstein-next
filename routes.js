@@ -5,4 +5,5 @@ module.exports = routes()
   .add("viewPost", "/posts/:category/:postId/:postTitle", "viewpost")
   .add("postByCategory", "/posts/:category", "posts")
   .add("allPosts", "/posts", "posts")
-  .add("login", "/login", "login");
+  .add("login", "/login", "login")
+  .add("createPost", "/createpost", "createpost");

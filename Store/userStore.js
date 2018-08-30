@@ -3,7 +3,7 @@ import axios from "../config/Axios/axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import isEmpty from "../utils/isEmpty";
-import Router from "../routes";
+import { Router } from "../routes";
 
 class UserStore {
   @observable
@@ -14,6 +14,7 @@ class UserStore {
   user = {};
   @observable
   successfullyReset = false;
+  email = "";
 
   constructor() {
     if (typeof localStorage !== "undefined" && localStorage.jwtToken) {
@@ -34,7 +35,7 @@ class UserStore {
       .post("/register", user)
       .then(res => {
         this.errors = {};
-        Router.pushRoute("/login");
+        Router.push("/login");
       })
       .catch(err => {
         this.errors = { ...err.response.data };
@@ -43,6 +44,7 @@ class UserStore {
 
   @action
   loginUser = (user, redirectPath) => {
+    console.log(Router);
     axios
       .post("/login", user)
       .then(res => {
@@ -54,14 +56,17 @@ class UserStore {
         this.refreshToken(3000 * 1000);
         if (redirectPath && redirectPath !== "") {
           this.errors = {};
-          Router.pushRoute(redirectPath);
+          Router.push(redirectPath);
         } else {
           this.errors = {};
-          Router.pushRoute("/");
+          //Router.push("/");
+          Router.replace(target);
         }
       })
       .catch(err => {
-        this.errors = { ...err.response.data };
+        if (err.response) {
+          this.errors = { ...err.response.data };
+        }
       });
   };
 
@@ -76,7 +81,7 @@ class UserStore {
     localStorage.removeItem("jwtToken");
     setAuthToken(false);
     this.setCurrentUser({});
-    Router.pushRoute("/login");
+    Router.push("/login");
   };
 
   @action

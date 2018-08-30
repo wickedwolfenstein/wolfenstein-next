@@ -9,23 +9,17 @@ const Footer = props => {
           <List floated="right" horizontal>
             <List.Item>
               <Link href="/terms">
-                <a activeClassName="active" className="item">
-                  Terms
-                </a>
+                <a className="item">Terms</a>
               </Link>
             </List.Item>
             <List.Item>
               <Link href="/privacy">
-                <a activeClassName="active" className="item">
-                  Privacy
-                </a>
+                <a className="item">Privacy</a>
               </Link>
             </List.Item>
             <List.Item>
               <Link href="/contactus">
-                <a activeClassName="active" className="item">
-                  Contact Us
-                </a>
+                <a className="item">Contact Us</a>
               </Link>
             </List.Item>
             <List.Item disabled href="#">
@@ -35,9 +29,7 @@ const Footer = props => {
           <List horizontal relaxed>
             <List.Item>
               <Link href="/aboutus">
-                <a activeClassName="active" className="item">
-                  About Us
-                </a>
+                <a className="item">About Us</a>
               </Link>
             </List.Item>
           </List>
@@ -47,30 +39,22 @@ const Footer = props => {
           <List horizontal className="textCenterAlign centerAlign">
             <List.Item>
               <Link href="/terms">
-                <a activeClassName="active" className="item">
-                  Terms
-                </a>
+                <a className="item">Terms</a>
               </Link>
             </List.Item>
             <List.Item>
               <Link href="/privacy">
-                <a activeClassName="active" className="item">
-                  Privacy
-                </a>
+                <a className="item">Privacy</a>
               </Link>
             </List.Item>
             <List.Item>
               <Link href="/contactus">
-                <a activeClassName="active" className="item">
-                  Contact Us
-                </a>
+                <a className="item">Contact Us</a>
               </Link>
             </List.Item>
             <List.Item>
               <Link href="/aboutus">
-                <a activeClassName="active" className="item">
-                  About Us
-                </a>
+                <a className="item">About Us</a>
               </Link>
             </List.Item>
           </List>

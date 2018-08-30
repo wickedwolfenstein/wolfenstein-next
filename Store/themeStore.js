@@ -25,9 +25,9 @@ class ThemeStore {
   // };
 
   @observable
-  headerColor = "blue";
+  headerColor = "";
   @observable
-  themeToggle = true;
+  themeToggle = null;
   @observable
   imageUrl = "";
   @observable
