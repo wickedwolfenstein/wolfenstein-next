@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Store from "../Store/userStore";
 import Layout from "./layout";
 import {
   Button,
@@ -18,9 +17,11 @@ import {
 import api from "../config/Axios/axios";
 import NextHead from "next/head";
 import NoSSR from "react-no-ssr";
-let FroalaEditor = null;
+import dynamic from "next/dynamic";
+
+let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
 if (typeof window !== "undefined") {
-  FroalaEditor = require("react-froala-wysiwyg");
+  //FroalaEditor = require("react-froala-wysiwyg");
   require("froala-editor/js/froala_editor.pkgd.min.js");
 }
 
@@ -341,250 +342,13 @@ export class EditPost extends Component {
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
         </NextHead>
-        <Modal
-          open={this.state.savePostErr}
-          closeOnEscape={false}
-          closeOnDimmerClick={false}
-          basic
-          size="small"
-        >
-          <Header icon="x" content="No no no!" />
-          <Modal.Content>
-            <h2>Users can only edit their posts.</h2>
-          </Modal.Content>
-        </Modal>
-        <Modal
-          open={this.state.open}
-          closeOnEscape={false}
-          closeOnDimmerClick={false}
-          onClose={this.close}
-        >
-          <Modal.Header>Enter Post Details</Modal.Header>
-          <Modal.Content>
-            <Form
-              autoComplete="off"
-              onSubmit={this.handleSubmit}
-              error={this.state.error}
-              warning={this.state.warning}
-              success={this.state.success}
-            >
-              <Message
-                warning={this.state.warning}
-                success={this.state.success}
-                error={
-                  !this.state.warning && !this.state.success ? true : false
-                }
-                header={this.state.messageHeader}
-                content={this.state.messageDesc}
-              />
-              <Header size="small" style={{ marginTop: "0" }}>
-                Post Details
-              </Header>
-              <Form.Group widths="equal">
-                <Form.Input
-                  fluid
-                  label="Post Title"
-                  name="title"
-                  placeholder="Title"
-                  required
-                  onChange={event => {
-                    this.inputHandler(event, "title");
-                  }}
-                />
-                <Form.Field>
-                  <label>Category</label>
-                  <Dropdown
-                    options={this.state.categories}
-                    placeholder="Category"
-                    search
-                    error={this.state.dropDownErr}
-                    selection
-                    fluid
-                    allowAdditions
-                    value={this.state.category}
-                    onAddItem={this.handleAddition}
-                    onChange={this.dropDownChanged}
-                  />
-                </Form.Field>
-                {/* <Form.Field
-                  control={Select}
-                  fluid
-                  label="Post Category"
-                  name="category"
-                  options={this.state.categories}
-                  placeholder="Category"
-                  onChange={this.dropDownChanged}
-                  required
-                /> */}
-              </Form.Group>
-              <Grid columns={2} divided>
-                <Grid.Row stretched>
-                  <Grid.Column>
-                    <Form.Input
-                      fluid
-                      name="cardDesc"
-                      label="Description"
-                      placeholder="Description Text"
-                      required
-                      onChange={event => {
-                        this.inputHandler(event, "cardDesc");
-                      }}
-                    />
-                    <Form.Input
-                      fluid
-                      name="cardImageUrl"
-                      label="Card Image Url"
-                      placeholder="URL"
-                      required
-                      onChange={event => {
-                        this.inputHandler(event, "cardImageUrl");
-                      }}
-                    />
-                    <Form.Input
-                      fluid
-                      name="heroImageUrl"
-                      label="Hero Image Url"
-                      placeholder="Hero Image Url"
-                      required
-                      disabled={this.state.copyCardImageToHero}
-                      onChange={event => {
-                        this.inputHandler(event, "heroImageUrl");
-                      }}
-                      value={
-                        this.state.copyCardImageToHero
-                          ? this.state.cardImageUrl
-                          : this.state.heroImageUrl
-                      }
-                    />
-                    <Form.Field
-                      control={Checkbox}
-                      label={<label>Same as Card Image</label>}
-                      onChange={e => {
-                        this.checkboxHandler(e);
-                      }}
-                    />
-                    <Form.Input
-                      fluid
-                      name="keywords"
-                      label={'Keywords (separated by comma " , ")'}
-                      placeholder="Keywords"
-                      required
-                      onChange={event => {
-                        this.inputHandler(event, "keywords");
-                      }}
-                    />
-                  </Grid.Column>
-                  <Grid.Column>
-                    <Card centered>
-                      <Image
-                        onError={this.imgError}
-                        src={
-                          !this.state.modalImgErr
-                            ? this.state.cardImageUrl
-                            : "image-placeholder_3x2.svg"
-                        }
-                      />
-                      <Card.Content>
-                        <Card.Header>{this.state.title}</Card.Header>
-                        <Card.Meta>
-                          <span className="date">
-                            {cate && this.state.category !== ""
-                              ? cate
-                              : "Post Category"}
-                          </span>
-                        </Card.Meta>
-                        <Card.Description>
-                          {this.state.cardDesc !== ""
-                            ? this.state.cardDesc
-                            : "Card Description"}
-                        </Card.Description>
-                      </Card.Content>
-                      <Card.Content extra>
-                        <a>
-                          <Icon name="calendar outline" />
-                          {this.date.toLocaleDateString("en-GB", {
-                            day: "numeric",
-                            month: "short",
-                            year: "2-digit"
-                          })}
-                        </a>
-                      </Card.Content>
-                    </Card>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-              <button
-                className="customhidden"
-                ref={this.submitButton}
-                type="submit"
-              >
-                Submit
-              </button>
-            </Form>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              onClick={this.okayButtonHandler}
-              positive
-              loading={this.state.savingPost}
-              labelPosition="right"
-              icon="checkmark"
-              content="Start"
-              type="submit"
-            />
-            <Button
-              onClick={this.cancelButtonHandler}
-              negative
-              icon="close"
-              content="Close"
-              labelPosition="right"
-            />
-          </Modal.Actions>
-        </Modal>
-        <Grid className="gridpushup">
-          <Grid.Row centered columns={3}>
-            <Grid.Column tablet={2} computer={3} only="computer tablet" />
-            <Grid.Column
-              mobile={16}
-              tablet={12}
-              computer={10}
-              className={"create-post-editor"}
-            >
-              {!this.state.savingPost && this.state.postId !== "" ? (
-                <NoSSR>
-                  <FroalaEditor
-                    model={this.state.content}
-                    onModelChange={this.handleModelChange}
-                    tag="textarea"
-                  />
-                </NoSSR>
-              ) : (
-                ""
-              )}
-
-              <div style={{ textAlign: "right" }}>
-                <Button.Group className={"create-post-button-group"}>
-                  <Button
-                    positive
-                    loading={this.state.savingPost}
-                    onClick={this.savePostHandler}
-                  >
-                    Save
-                  </Button>
-                  <Button.Or />
-                  <Button onClick={this.cancelButtonHandler}>Cancel</Button>
-                </Button.Group>
-              </div>
-
-              <Divider horizontal>Output</Divider>
-              <div
-                className="fr-view"
-                dangerouslySetInnerHTML={{ __html: this.state.content }}
-              />
-            </Grid.Column>
-            <Grid.Column tablet={2} computer={3} only="computer tablet" />
-          </Grid.Row>
-        </Grid>
+        <NoSSR>
+          <FroalaEditor
+            model={this.state.content}
+            onModelChange={this.handleModelChange}
+            tag="textarea"
+          />
+        </NoSSR>
       </Layout>
     );
   }
