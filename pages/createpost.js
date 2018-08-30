@@ -16,13 +16,13 @@ import {
 } from "semantic-ui-react";
 import api from "../config/Axios/axios";
 import NextHead from "next/head";
-import NoSSR from "react-no-ssr";
 import dynamic from "next/dynamic";
-
+import $ from "jquery";
+import "froala-editor/js/froala_editor.pkgd.min.js";
 let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
 if (typeof window !== "undefined") {
+  window.$ = window.jQuery = $;
   //FroalaEditor = require("react-froala-wysiwyg");
-  require("froala-editor/js/froala_editor.pkgd.min.js");
 }
 
 import { withRouter } from "../routes";
@@ -341,14 +341,13 @@ export class EditPost extends Component {
             rel="stylesheet"
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
+          <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
         </NextHead>
-        <NoSSR>
-          <FroalaEditor
-            model={this.state.content}
-            onModelChange={this.handleModelChange}
-            tag="textarea"
-          />
-        </NoSSR>
+        <FroalaEditor
+          model={this.state.content}
+          onModelChange={this.handleModelChange}
+          tag="textarea"
+        />
       </Layout>
     );
   }
