@@ -4,6 +4,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import isEmpty from "../utils/isEmpty";
 import { Router } from "../routes";
+let Store = undefined;
 
 class UserStore {
   @observable
@@ -17,7 +18,7 @@ class UserStore {
   email = "";
 
   constructor() {
-    if (typeof localStorage !== "undefined" && localStorage.jwtToken) {
+    if (localStorage.jwtToken) {
       const decoded = jwt_decode(localStorage.jwtToken);
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
@@ -25,6 +26,7 @@ class UserStore {
       } else {
         setAuthToken(localStorage.jwtToken);
         this.setCurrentUser(decoded);
+        this.refreshToken(3600 * 1000);
       }
     }
   }
@@ -44,7 +46,6 @@ class UserStore {
 
   @action
   loginUser = (user, redirectPath) => {
-    console.log(Router);
     axios
       .post("/login", user)
       .then(res => {
@@ -54,13 +55,13 @@ class UserStore {
         const decoded = jwt_decode(token);
         this.setCurrentUser(decoded);
         this.refreshToken(3000 * 1000);
+        console.log(redirectPath);
         if (redirectPath && redirectPath !== "") {
           this.errors = {};
           Router.push(redirectPath);
         } else {
           this.errors = {};
-          //Router.push("/");
-          Router.replace(target);
+          Router.push("/");
         }
       })
       .catch(err => {
@@ -116,6 +117,10 @@ class UserStore {
   };
 }
 
-const Store = new UserStore();
-
-export default Store;
+export function initUserStore() {
+  if (Store === undefined) {
+    Store = new UserStore();
+  }
+  return Store;
+}
+export default initUserStore;

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Menu, Segment, Button } from "semantic-ui-react";
 import { Link } from "../../routes";
-import userStore from "../../Store/userStore";
 import LightDarkSwitch from "../LightDarkSwitch/LightDarkSwitch";
 import { observer } from "mobx-react";
 @observer
 export class Header extends Component {
   menuClickHandler = e => {
-    this.Store.toggleDropdown();
+    this.props.store.toggleDropdown();
     e.preventDefault();
   };
   render() {
     let Store = this.props.store;
+    let userStore = this.props.userStore;
     return (
       <Segment
         inverted
@@ -25,14 +25,14 @@ export class Header extends Component {
           color={(Store && Store.headerColor) || "blue"}
           stackable
         >
-          <Link href="/">
+          <Link prefetch href="/">
             <Menu.Item>
               <img
                 src="/static/assets/WolfLogo_1x.png"
                 width={"32px"}
                 alt={"logo"}
               />
-              {userStore.isAuth ? (
+              {userStore && userStore.isAuth ? (
                 <Button
                   basic
                   circular
@@ -48,7 +48,7 @@ export class Header extends Component {
                 id="nav-icon3"
                 onClick={this.menuClickHandler}
                 className={
-                  (!userStore.isAuth ? "navMarginLeft " : "") +
+                  (userStore && !userStore.isAuth ? "navMarginLeft " : "") +
                   (Store && Store.dropdownMenuOpen ? "open" : "")
                 }
               >
@@ -66,22 +66,22 @@ export class Header extends Component {
                 : "slideInDown"
             }
           >
-            <Link href="/">
+            <Link prefetch href="/">
               <Menu.Item className="item">Home</Menu.Item>
             </Link>
 
-            {userStore.isAuth ? (
-              <Link href="/createpost">
+            {userStore && userStore.isAuth ? (
+              <Link prefetch href="/createpost">
                 <Menu.Item className="item">Add</Menu.Item>
               </Link>
             ) : (
               undefined
             )}
-            <Link href="/posts">
+            <Link prefetch href="/posts">
               <Menu.Item className="item">Posts</Menu.Item>
             </Link>
-            {userStore.isAuth ? (
-              <Link href="/profile">
+            {userStore && userStore.isAuth ? (
+              <Link prefetch href="/profile">
                 <Menu.Item className="item">Profile</Menu.Item>
               </Link>
             ) : (
@@ -105,7 +105,7 @@ export class Header extends Component {
           </Link> */}
           </div>
           <Menu.Menu position="right" className="LDSHeader hideOnMob">
-            {userStore.isAuth ? (
+            {userStore && userStore.isAuth ? (
               <Menu.Item onClick={() => userStore.logoutUser()}>
                 <Button basic circular icon="power off" />
               </Menu.Item>

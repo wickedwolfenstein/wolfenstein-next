@@ -72,11 +72,15 @@ export const ViewPost = props => {
           {props.post ? (
             <Image
               src={props.post.heroImage || props.post.card.cardImage}
-              className={"catfather"}
+              className={"catfather bannerWithBoxShadow"}
               alt={props.post.title}
             />
           ) : (
-            <svg className="placeholder" width="100%" height="100%" />
+            <svg
+              className="placeholder bannerWithBoxShadow"
+              width="100%"
+              height="100%"
+            />
           )}
         </Grid.Column>
       </Grid>

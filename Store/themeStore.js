@@ -38,7 +38,8 @@ class ThemeStore {
   dropdownMenuOpen = false;
 
   constructor() {
-    const localStorageThemeColor = localStorage.getItem("theme");
+    const localStorageThemeColor =
+      localStorage && localStorage.getItem("theme");
     if (localStorageThemeColor === this.THEMES.RED) {
       this.headerColor = this.THEMES.RED;
       this.themeToggle = false;

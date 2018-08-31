@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Layout from "./layout";
 import Head from "../components/head";
 import jwt_decode from "jwt-decode";
-import UserStore from "../Store/userStore";
+import { initUserStore } from "../Store/userStore";
 import setAuthToken from "../utils/setAuthToken";
 import { Router } from "../routes";
 import {
@@ -17,20 +17,31 @@ import { observer } from "mobx-react";
 
 @observer
 export class Login extends React.Component {
+  UserStore = null;
+  sentPost = false;
   componentDidMount() {
+    console.log(Router);
+    this.UserStore = initUserStore();
+    Router.prefetch("/");
+    if (
+      Router.router.query.redirectPage &&
+      Router.router.query.redirectPage !== ""
+    ) {
+      Router.prefetch("/" + Router.router.query.redirectPage);
+    }
     if (localStorage.jwtToken) {
       const decoded = jwt_decode(localStorage.jwtToken);
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
-        UserStore.logoutUser();
+        this.UserStore.logoutUser();
       } else {
         setAuthToken(localStorage.jwtToken);
-        UserStore.setCurrentUser(decoded);
+        this.UserStore.setCurrentUser(decoded);
       }
     }
-    if (UserStore.isAuth) {
+    if (this.UserStore.isAuth) {
       //Router.pushRoute("/");
-      Router.replace("/");
+      Router.push("/");
     }
   }
 
@@ -55,20 +66,24 @@ export class Login extends React.Component {
       password
     };
     let redirPath = "/";
-    if (
-      ((((this.props || {}).location || {}).state || {}).from || {}).pathname
-    ) {
-      redirPath = this.props.location.state.from.pathname;
+
+    if ((((Router || {}).router || {}).query || {}).redirectPage) {
+      redirPath = "/" + Router.router.query.redirectPage;
     }
-    console.log(redirPath);
-    UserStore.loginUser(user, redirPath);
+    this.UserStore.loginUser(user, redirPath);
   };
 
   render() {
-    const keys = Object.keys(UserStore.errors);
-    const errMessages = keys.map(x => {
-      return <Message.Item key={x}>{UserStore.errors[x]}</Message.Item>;
-    });
+    const UserStore = this.UserStore;
+    let keys = undefined;
+    let errMessages = undefined;
+    if (UserStore !== null) {
+      keys = Object.keys(UserStore.errors);
+      errMessages = keys.map(x => {
+        return <Message.Item key={x}>{UserStore.errors[x]}</Message.Item>;
+      });
+    }
+
     return (
       <Layout>
         <Head
@@ -93,16 +108,23 @@ export class Login extends React.Component {
                 <Header size="medium" className="textCenterAlign">
                   Login
                 </Header>
-                <Form onSubmit={this.handleSubmit} error={keys.length > 0}>
+                <Form
+                  onSubmit={this.handleSubmit}
+                  error={keys !== undefined && keys.length > 0}
+                >
                   <Message error>
                     <Message.Header>Error Occured</Message.Header>
                     <Message.List>
-                      {errMessages ? errMessages : ""}
+                      {errMessages !== undefined ? errMessages : ""}
                     </Message.List>
                   </Message>
                   <Form.Field
                     error={
-                      UserStore.errors && UserStore.errors.email ? true : false
+                      UserStore !== null &&
+                      UserStore.errors &&
+                      UserStore.errors.email
+                        ? true
+                        : false
                     }
                   >
                     <label>Email</label>
@@ -110,7 +132,9 @@ export class Login extends React.Component {
                   </Form.Field>
                   <Form.Field
                     error={
-                      UserStore.errors && UserStore.errors.password
+                      UserStore !== null &&
+                      UserStore.errors &&
+                      UserStore.errors.password
                         ? true
                         : false
                     }
