@@ -64,7 +64,7 @@ export class CreatePost extends Component {
     Store = initUserStore();
     if (!Store.isAuth) {
       //Router.pushRoute("/");
-      Router.push("/login");
+      Router.push("/login/createpost");
     }
     api.get("/category").then(res => {
       if (res.data) {
@@ -75,6 +75,7 @@ export class CreatePost extends Component {
             value: item.value
           };
         });
+        console.log(this.props.router.pathname);
         if (this.props.router.pathname) {
           const urlParts = this.props.router.pathname.split("/").filter(x => x);
           if (
@@ -495,7 +496,7 @@ export class CreatePost extends Component {
                             src={
                               !this.state.modalImgErr
                                 ? this.state.cardImageUrl
-                                : "image-placeholder_3x2.svg"
+                                : "/static/assets/image-placeholder_3x2.svg"
                             }
                           />
                           <Card.Content>

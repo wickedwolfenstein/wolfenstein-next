@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 if (typeof window !== "undefined") {
   $ = require("zepto");
 }
+import { Dimmer, Loader } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import initStore from "../../Store/themeStore";
 let Store = null;
@@ -9,6 +10,7 @@ let Store = null;
 export class Banner2 extends Component {
   componentDidMount() {
     Store = initStore();
+    this.forceUpdate();
     // Polyfill for requestAnimationFrame
     (function() {
       // eslint-disable-next-line
@@ -248,17 +250,28 @@ export class Banner2 extends Component {
                   : " LSCatAdjust")
               }
             >
-              {this.props.headerText}
+              {Store && !Store.themeToggle
+                ? this.props.headerText2
+                : this.props.headerText1}
             </h1>
             <h2
               className={
-                Store && Store.themeToggle ? " LSCatAdjust" : " LSWolfAdjust"
+                Store && !Store.themeToggle ? " LSWolfAdjust" : " LSCatAdjust"
               }
             >
-              {this.props.subheading}
+              {Store && !Store.themeToggle
+                ? this.props.subheading2
+                : this.props.subheading1}
             </h2>
           </div>
         </div>
+        {!Store ? (
+          <Dimmer active>
+            <Loader size="massive">Loading</Loader>
+          </Dimmer>
+        ) : (
+          ""
+        )}
       </Fragment>
     );
   }

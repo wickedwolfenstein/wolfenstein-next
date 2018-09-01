@@ -16,7 +16,7 @@ import { Layout } from "./layout";
 let UserStore = null;
 @observer
 export class UserProfile extends Component {
-  state = { activeItem: "home" };
+  state = { activeItem: "home", updated: false };
 
   componentDidMount() {
     UserStore = initUserStore();
@@ -34,6 +34,7 @@ export class UserProfile extends Component {
         new_password,
         new_password_confirm
       });
+      this.setState({ updated: !this.state.updated });
     }
   };
   render() {
@@ -74,11 +75,9 @@ export class UserProfile extends Component {
                   onSubmit={this.handleSubmit}
                   error={keys && keys.length > 0}
                 >
-                  <Message error className={"userProfileMessage"}>
+                  <Message error className={""}>
                     <Message.Header>Error Occured</Message.Header>
-                    <Message.List>
-                      {errMessages ? errMessages : ""}
-                    </Message.List>
+                    <Message.List>{errMessages}</Message.List>
                   </Message>
                   <Form.Field
                     error={

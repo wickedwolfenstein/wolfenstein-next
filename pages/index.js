@@ -26,8 +26,10 @@ export class HomePage extends Component {
         <Banner2
           className={"wolf"}
           altText={"Banner"}
-          headerText={"Placeholder Text"}
-          subheading={"Apple and Bottoms"}
+          headerText1={"Meet Sno!"}
+          headerText2={"Meet Rex!"}
+          subheading1={"The Cutest Cat in town"}
+          subheading2={"The Baddest Beast in town"}
         />
         <PostList categories={this.props.categories} posts={this.props.posts} />
       </Layout>

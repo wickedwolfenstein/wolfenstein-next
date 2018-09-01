@@ -118,7 +118,13 @@ export const ViewPost = props => {
                   url={
                     typeof window !== "undefined" ? window.location.href : ""
                   }
-                  media={props.post ? props.post.card.cardImage : "/0.png"}
+                  media={
+                    props.post ? (
+                      props.post.card.cardImage
+                    ) : (
+                      <svg className="placeholder" width="100%" height="100%" />
+                    )
+                  }
                 >
                   <PinterestIcon size={48} round />
                 </PinterestShareButton>
@@ -171,7 +177,7 @@ export const ViewPost = props => {
               </WhatsappShareButton>
               <PinterestShareButton
                 url={typeof window !== "undefined" ? window.location.href : ""}
-                media={props.post ? props.post.card.cardImage : "/0.png"}
+                media={props.post ? props.post.card.cardImage : ""}
               >
                 <PinterestIcon size={48} round />
               </PinterestShareButton>
@@ -197,6 +203,7 @@ export const ViewPost = props => {
                 <Disqus.DiscussionEmbed
                   shortname={disqusShortname}
                   config={disqusConfig}
+                  className={"fr-view"}
                 />
               </Fragment>
             ) : (

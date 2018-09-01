@@ -39,7 +39,7 @@ export class UserPosts extends Component {
 
   editPost = id => {
     if (id && id !== "") {
-      this.props.router.push("/profile/posts/" + id);
+      this.props.router.push("/editpost/" + id);
     }
   };
 

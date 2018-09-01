@@ -55,7 +55,6 @@ class UserStore {
         const decoded = jwt_decode(token);
         this.setCurrentUser(decoded);
         this.refreshToken(3000 * 1000);
-        console.log(redirectPath);
         if (redirectPath && redirectPath !== "") {
           this.errors = {};
           Router.push(redirectPath);
@@ -65,9 +64,7 @@ class UserStore {
         }
       })
       .catch(err => {
-        if (err.response) {
-          this.errors = { ...err.response.data };
-        }
+        this.errors = { ...err.response.data };
       });
   };
 

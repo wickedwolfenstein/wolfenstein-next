@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
-import { withRouter } from "next/router";
-import Router from "next/router";
-import Head from "../components/head";
 import jwt_decode from "jwt-decode";
-import { initUserStore } from "../Store/userStore";
-import setAuthToken from "../utils/setAuthToken";
+import { withRouter } from "next/router";
+import { observer } from "mobx-react";
+import setAuthToken from "../utils/isEmpty";
+import initUserStore from "../Store/userStore";
 import Layout from "./layout";
+import Head from "../components/head";
+import Router from "next/router";
 import {
   Button,
   Form,
@@ -17,33 +17,29 @@ import {
 } from "semantic-ui-react";
 let UserStore = null;
 @observer
-class Login extends Component {
+class Registeration extends Component {
   state = {
+    name: "",
     email: "",
-    sentPost: false
+    password: "",
+    password_confirm: ""
   };
 
   componentDidMount() {
     Router.prefetch("/");
+    Router.prefetch("/login");
     UserStore = initUserStore();
-    if (
-      Router.router.query.redirectPage &&
-      Router.router.query.redirectPage !== ""
-    ) {
-      Router.prefetch("/" + Router.router.query.redirectPage);
-    }
     if (localStorage.jwtToken) {
       const decoded = jwt_decode(localStorage.jwtToken);
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
-        UserStore.logoutUser();
+        UserStore.logoutUser(this.props.history);
       } else {
         setAuthToken(localStorage.jwtToken);
         UserStore.setCurrentUser(decoded);
       }
     }
     if (UserStore.isAuth) {
-      //Router.pushRoute("/");
       Router.push("/");
     }
   }
@@ -54,27 +50,21 @@ class Login extends Component {
     });
   };
 
-  registerButtonClickHandler = e => {
-    e.preventDefault();
-    Router.pushRoute("/register");
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     const data = new FormData(e.target);
+    const name = data.get("name");
     const email = data.get("email");
     const password = data.get("password");
-    const user = {
-      email,
-      password
-    };
-    let redirPath = "/";
+    const password_confirm = data.get("password_confirm");
 
-    if ((((Router || {}).router || {}).query || {}).redirectPage) {
-      redirPath = "/" + Router.router.query.redirectPage;
-    }
-    UserStore.loginUser(user, redirPath);
-    this.setState({ updated: !this.state.updated });
+    const user = {
+      name,
+      email,
+      password,
+      password_confirm
+    };
+    UserStore.registerUser(user);
   };
 
   render() {
@@ -86,21 +76,20 @@ class Login extends Component {
         return <Message.Item key={x}>{UserStore.errors[x]}</Message.Item>;
       });
     }
-
     return (
       <Layout>
         <Head
-          title={"Wickedity | Login"}
-          metaTitle={"Wickedity | Login"}
-          metaKeywords={"wickedity,login"}
+          title={"Wickedity | Registration"}
+          metaTitle={"Wickedity | Registration"}
+          metaKeywords={"wickedity,Registration"}
           url={typeof window !== "undefined" ? window.location.href : ""}
           metaDescription={"Login to start posting on this site."}
-          orgTitle={"Wickedity | Login"}
-          orgDescription={"Login to start posting on this site."}
+          orgTitle={"Wickedity | Registration"}
+          orgDescription={"Register to start posting on this site."}
         />
-        <Grid doubling stackable className={"takeFullHeight"}>
+        <Grid className={"takeFullHeight"}>
           <Grid.Row centered columns={3}>
-            <Grid.Column tablet={2} computer={3} only="computer tablet" />
+            <Grid.Column tablet={2} computer={3} only="computer" />
             <Grid.Column
               mobile={16}
               tablet={12}
@@ -109,16 +98,33 @@ class Login extends Component {
             >
               <Segment textAlign="left" raised className="formSegment">
                 <Header size="medium" className="textCenterAlign">
-                  Login
+                  Register
                 </Header>
                 <Form
                   onSubmit={this.handleSubmit}
-                  error={keys !== undefined && keys.length > 0}
+                  error={keys && keys.length > 0}
                 >
                   <Message error>
                     <Message.Header>Error Occured</Message.Header>
                     <Message.List>{errMessages}</Message.List>
                   </Message>
+                  <Form.Field
+                    error={
+                      UserStore && UserStore.errors && UserStore.errors.name
+                        ? true
+                        : false
+                    }
+                  >
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      className="form-control"
+                      name="name"
+                      onChange={this.handleInputChange}
+                      value={this.state.name}
+                    />
+                  </Form.Field>
                   <Form.Field
                     error={
                       UserStore && UserStore.errors && UserStore.errors.email
@@ -127,7 +133,14 @@ class Login extends Component {
                     }
                   >
                     <label>Email</label>
-                    <input type="email" placeholder="Email" name="email" />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="form-control"
+                      name="email"
+                      onChange={this.handleInputChange}
+                      value={this.state.email}
+                    />
                   </Form.Field>
                   <Form.Field
                     error={
@@ -140,17 +153,32 @@ class Login extends Component {
                     <input
                       type="password"
                       placeholder="Password"
+                      className="form-control"
                       name="password"
+                      onChange={this.handleInputChange}
+                      value={this.state.password}
                     />
                   </Form.Field>
-                  <Button type="submit">Login</Button>
-                  <Button
-                    floated="right"
-                    type="button"
-                    onClick={this.registerButtonClickHandler}
+                  <Form.Field
+                    error={
+                      UserStore &&
+                      UserStore.errors &&
+                      UserStore.errors.password_confirm
+                        ? true
+                        : false
+                    }
                   >
-                    Register
-                  </Button>
+                    <label>Confirm Password</label>
+                    <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      className="form-control"
+                      name="password_confirm"
+                      onChange={this.handleInputChange}
+                      value={this.state.password_confirm}
+                    />
+                  </Form.Field>
+                  <Button type="submit">Register</Button>
                 </Form>
               </Segment>
             </Grid.Column>
@@ -162,4 +190,4 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+export default withRouter(Registeration);
