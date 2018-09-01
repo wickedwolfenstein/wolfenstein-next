@@ -1,3 +1,5 @@
+const axios = require("axios");
+const config = require("./config/backendUrl");
 module.exports = {
   useFileSystemPublicRoutes: false,
   webpack: config => {
@@ -10,5 +12,48 @@ module.exports = {
       use: "imports-loader?this=>window"
     });
     return config;
+  },
+  exportPathMap: async function(defaultPathMap) {
+    const pages = {
+      "/": { page: "/index" },
+      "/about": { page: "/about" },
+      "/contact": { page: "/contact" },
+      "/privacy": { page: "/privacy" },
+      "/terms": { page: "/terms" },
+      "/login": { page: "/login" },
+      "/profile": { page: "/profile" },
+      "/posts": { page: "/posts" },
+      "/createpost": { page: "/createpost" }
+    };
+    let paths = await axios
+      .get(
+        (process.env !== "production" ? config.local : config.prod) + "/post"
+      )
+      // get all the posts and return those with slug
+      .then(data => {
+        console.log(data.data);
+        let posts = data.data.reduce((acc, curr) => {
+          let postid = curr._id;
+          let Obj = Object.assign(acc, {
+            [`${curr.pageURL}`]: {
+              page: "/viewpost",
+              query: { postId: postid }
+            }
+          });
+          return Obj;
+        }, {});
+        let editPosts = data.data.reduce((acc, curr) => {
+          let postid = curr._id;
+          let Obj = Object.assign(acc, {
+            [`/editpost/${postid}`]: {
+              page: "/editpost",
+              query: { postId: postid }
+            }
+          });
+          return Obj;
+        }, {});
+        return { ...pages, ...posts, ...editPosts };
+      });
+    return paths;
   }
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
-
+import config from "../backendUrl";
 export default axios.create({
-  //baseURL: "http://192.168.1.40:3001"
-  baseURL: "https://wickedity.herokuapp.com"
+  baseURL: process.env !== "production" ? config.local : config.prod
 });
