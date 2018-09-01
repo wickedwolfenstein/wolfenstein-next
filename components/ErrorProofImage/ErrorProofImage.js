@@ -1,12 +1,12 @@
-import React, { Fragment, Component } from 'react';
-import { Image } from 'semantic-ui-react';
+import React, { Fragment, Component } from "react";
+import { Image } from "semantic-ui-react";
 export class ErrorProofImage extends Component {
   state = {
-    error: false,
+    error: false
   };
   imgErrHandler = () => {
     this.setState({
-      error: true,
+      error: true
     });
   };
   render() {

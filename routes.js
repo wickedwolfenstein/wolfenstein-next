@@ -10,7 +10,7 @@ module.exports = routes()
   .add("profile")
   .add("register")
   .add("editpost", "/editpost/:postId", "editpost")
-  .add("FooterPage1", "/terms", "footerPages")
-  .add("FooterPage2", "/aboutus", "footerPages")
-  .add("FooterPage3", "/contact", "footerPages")
-  .add("FooterPage4", "/privacy", "footerPages");
+  .add("terms")
+  .add("about")
+  .add("contact")
+  .add("privacy");

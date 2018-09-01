@@ -18,8 +18,8 @@ const Footer = props => {
               </Link>
             </List.Item>
             <List.Item>
-              <Link href="/contactus">
-                <a className="item">Contact Us</a>
+              <Link href="/contact">
+                <a className="item">Contact</a>
               </Link>
             </List.Item>
             <List.Item disabled href="#">
@@ -28,8 +28,8 @@ const Footer = props => {
           </List>
           <List horizontal relaxed>
             <List.Item>
-              <Link href="/aboutus">
-                <a className="item">About Us</a>
+              <Link href="/about">
+                <a className="item">About</a>
               </Link>
             </List.Item>
           </List>
@@ -48,13 +48,13 @@ const Footer = props => {
               </Link>
             </List.Item>
             <List.Item>
-              <Link href="/contactus">
-                <a className="item">Contact Us</a>
+              <Link href="/contact">
+                <a className="item">Contact</a>
               </Link>
             </List.Item>
             <List.Item>
-              <Link href="/aboutus">
-                <a className="item">About Us</a>
+              <Link href="/about">
+                <a className="item">About</a>
               </Link>
             </List.Item>
           </List>
