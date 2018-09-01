@@ -1,4 +1,6 @@
 module.exports = {
-  local: "http://192.168.1.40:3001",
-  prod: "https://wickedity.herokuapp.com"
+  baseURL:
+    process.env.NODE_ENV !== "production"
+      ? process.env.HOST || "http://localhost:3001"
+      : "https://wickedity.herokuapp.com"
 };

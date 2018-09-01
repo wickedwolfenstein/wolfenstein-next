@@ -26,12 +26,9 @@ module.exports = {
       "/createpost": { page: "/createpost" }
     };
     let paths = await axios
-      .get(
-        (process.env !== "production" ? config.local : config.prod) + "/post"
-      )
+      .get(config.baseURL + "/post")
       // get all the posts and return those with slug
       .then(data => {
-        console.log(data.data);
         let posts = data.data.reduce((acc, curr) => {
           let postid = curr._id;
           let Obj = Object.assign(acc, {
