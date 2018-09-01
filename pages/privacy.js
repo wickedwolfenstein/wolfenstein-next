@@ -40,7 +40,10 @@ export class Privacy extends Component {
                 use, and disclosure of personal data when you use our Service
                 and the choices you have associated with that data. This Privacy
                 Policy for Wickedity is powered by{" "}
-                <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator.php">
+                <a
+                  target={"_blank"}
+                  href="https://www.freeprivacypolicy.com/free-privacy-policy-generator.php"
+                >
                   FreePrivacyPolicy.com
                 </a>
                 .
@@ -124,7 +127,59 @@ export class Privacy extends Component {
                   security purposes.
                 </li>
               </ul>
+              <h3>DoubleClick DART Cookie</h3>
+              <p>
+                Google, as a third party vendor, uses cookies to serve ads on
+                www.wickedity.com. Google's use of the DART cookie enables it to
+                serve ads to our site's visitors based upon their visit to
+                www.wickedity.com and other sites on the Internet. Users may opt
+                out of the use of the DART cookie by visiting the Google ad and
+                content network privacy policy at the following URL -
+                <a
+                  href="https://policies.google.com/technologies/ads"
+                  title="Google Ads policy"
+                  target={"_blank"}
+                >
+                  https://policies.google.com/technologies/ads
+                </a>
+              </p>
 
+              <b>Our Advertising Partners</b>
+              <p>
+                Some of our advertising partners may use cookies and web beacons
+                on our site. Our advertising partners include
+              </p>
+              <ul>
+                <li>Google</li>
+              </ul>
+              <p>
+                Google has their own privacy policies, which can be accessed by
+                these URLs
+                <br />
+                <a href="https://privacy.google.com/" target={"_blank"}>
+                  Google's Privacy Policies
+                </a>
+                <br />
+                <a href="https://policies.google.com/" target={"_blank"}>
+                  Google's Policies
+                </a>
+              </p>
+              <p>
+                {" "}
+                These third-party ad servers or ad networks use technology in
+                their respective advertisements and links that appear on
+                www.wickedity.com and which are sent directly to your browser.
+                They automatically receive your IP address when this occurs.
+                Other technologies (such as cookies, JavaScript, or Web Beacons)
+                may also be used by our site's third-party ad networks to
+                measure the effectiveness of their advertising campaigns and/or
+                to personalize the advertising content that you see on the site.{" "}
+              </p>
+              <p>
+                {" "}
+                www.wickedity.com has no access to or control over these cookies
+                that are used by third-party advertisers.{" "}
+              </p>
               <h2>Use of Data</h2>
 
               <p>Wickedity uses the collected data for various purposes:</p>
@@ -244,7 +299,10 @@ export class Privacy extends Component {
                   <p>
                     For more information on the privacy practices of Google,
                     please visit the Google Privacy & Terms web page:{" "}
-                    <a href="https://policies.google.com/privacy?hl=en">
+                    <a
+                      target={"_blank"}
+                      href="https://policies.google.com/privacy?hl=en"
+                    >
                       https://policies.google.com/privacy?hl=en
                     </a>
                   </p>
