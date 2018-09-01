@@ -24,8 +24,9 @@ class Login extends Component {
   };
 
   componentDidMount() {
+    this.UserStore = initUserStore();
     Router.prefetch("/");
-    UserStore = initUserStore();
+    Router.prefetch("/register");
     if (
       Router.router.query.redirectPage &&
       Router.router.query.redirectPage !== ""

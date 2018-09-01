@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = props => {
   return (
     <Segment className={"footer"}>
-      {601 > 600 ? (
+      {typeof window !== "undefined" && window.innerWidth > 600 ? (
         <Fragment>
           <List floated="right" horizontal>
             <List.Item>
