@@ -20,9 +20,9 @@ export class Login extends React.Component {
   UserStore = null;
   sentPost = false;
   componentDidMount() {
-    console.log(Router);
     this.UserStore = initUserStore();
     Router.prefetch("/");
+    Router.prefetch("/register");
     if (
       Router.router.query.redirectPage &&
       Router.router.query.redirectPage !== ""

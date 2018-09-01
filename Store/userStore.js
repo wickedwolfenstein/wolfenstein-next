@@ -55,7 +55,6 @@ class UserStore {
         const decoded = jwt_decode(token);
         this.setCurrentUser(decoded);
         this.refreshToken(3000 * 1000);
-        console.log(redirectPath);
         if (redirectPath && redirectPath !== "") {
           this.errors = {};
           Router.push(redirectPath);
