@@ -24,7 +24,7 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    this.UserStore = initUserStore();
+    UserStore = initUserStore();
     Router.prefetch("/");
     Router.prefetch("/register");
     if (
@@ -128,7 +128,12 @@ class Login extends Component {
                     }
                   >
                     <label>Email</label>
-                    <input type="email" placeholder="Email" name="email" />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      autoComplete="email"
+                    />
                   </Form.Field>
                   <Form.Field
                     error={
@@ -142,6 +147,7 @@ class Login extends Component {
                       type="password"
                       placeholder="Password"
                       name="password"
+                      autoComplete="password"
                     />
                   </Form.Field>
                   <Button type="submit">Login</Button>

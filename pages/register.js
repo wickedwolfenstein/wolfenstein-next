@@ -140,6 +140,7 @@ class Registeration extends Component {
                       name="email"
                       onChange={this.handleInputChange}
                       value={this.state.email}
+                      autoComplete="email"
                     />
                   </Form.Field>
                   <Form.Field
@@ -157,6 +158,7 @@ class Registeration extends Component {
                       name="password"
                       onChange={this.handleInputChange}
                       value={this.state.password}
+                      autoComplete="password"
                     />
                   </Form.Field>
                   <Form.Field
@@ -176,6 +178,7 @@ class Registeration extends Component {
                       name="password_confirm"
                       onChange={this.handleInputChange}
                       value={this.state.password_confirm}
+                      autoComplete="password_confirm"
                     />
                   </Form.Field>
                   <Button type="submit">Register</Button>

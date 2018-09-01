@@ -93,6 +93,7 @@ export class UserProfile extends Component {
                       type="password"
                       placeholder="Old Password"
                       name="old_password"
+                      autoComplete="old_password"
                     />
                   </Form.Field>
                   <Form.Field
@@ -109,6 +110,7 @@ export class UserProfile extends Component {
                       type="password"
                       placeholder="Password"
                       name="new_password"
+                      autoComplete="new_password"
                     />
                   </Form.Field>
                   <Form.Field
@@ -125,6 +127,7 @@ export class UserProfile extends Component {
                       type="password"
                       placeholder="Password"
                       name="new_password_confirm"
+                      autoComplete="new_password_confirm"
                     />
                   </Form.Field>
                   <Button type="submit">Change Password</Button>
