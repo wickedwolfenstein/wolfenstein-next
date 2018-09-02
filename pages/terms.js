@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Head from "../components/head";
 import { Layout } from "./layout";
+
 import { Grid, Divider } from "semantic-ui-react";
 export class Terms extends Component {
   render() {
