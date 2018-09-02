@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import NextHead from "next/head";
 import Header from "../components/Header/Header";
-import { Dimmer, Loader } from "semantic-ui-react";
+import { Link } from "../routes";
+import { Dimmer, Loader, Message, Button } from "semantic-ui-react";
 import Footer from "../components/Footer/Footer";
 import { initStore } from "../Store/themeStore";
 import { initUserStore } from "../Store/userStore";
@@ -12,8 +13,23 @@ export class Layout extends Component {
     userStore = initUserStore();
     Store = initStore();
     this.forceUpdate();
+    if (localStorage) {
+      let cookieConsent = localStorage.getItem("cookieConsent");
+      if (!cookieConsent) {
+        this.setState({ visible: true });
+      } else {
+        this.setState({ visible: false });
+      }
+    }
   }
+  state = { visible: true };
 
+  handleDismiss = () => {
+    if (localStorage) {
+      localStorage.setItem("cookieConsent", true);
+    }
+    this.setState({ visible: false });
+  };
   render() {
     return Store && userStore ? (
       <Fragment>
@@ -35,6 +51,32 @@ export class Layout extends Component {
           />
         </NextHead>
         <Header store={Store} userStore={userStore} />
+        {this.state.visible ? (
+          <Message
+            onDismiss={this.handleDismiss}
+            className="cookieConsentMessage fadeIn"
+            compact
+            color="black"
+            size="mini"
+            id={"Cookie Consent Popup"}
+          >
+            <Message.Content>
+              <p style={{ fontSize: "14px", color: "white" }}>
+                This website uses cookies/Storage to ensure you get the best
+                experience on our website.
+              </p>
+              <div style={{ textAlign: "center" }}>
+                <Link href="/terms">
+                  <Button size="mini" color="blue">
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
+            </Message.Content>
+          </Message>
+        ) : (
+          ""
+        )}
         {this.props.children}
         <Footer />
       </Fragment>

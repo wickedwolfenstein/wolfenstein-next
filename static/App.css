@@ -75,7 +75,6 @@ svg.placeholder {
 .catfather {
   width: 100%;
 }
-
 .formSegment {
   margin: auto !important;
   margin-top: 4rem !important;
@@ -174,10 +173,23 @@ div.clickable .anchor-clickable {
     display: inline-block;
     margin-right: 1rem;
   }
+  .cookieConsentMessage {
+    position: fixed !important;
+    z-index: 201;
+    width: 100%;
+    bottom: 0;
+  }
 }
 @media (min-width: 767px) {
   .hideOnTabAbove {
     display: none !important;
+  }
+  .cookieConsentMessage {
+    position: fixed !important;
+    z-index: 201;
+    width: 33%;
+    right: 1%;
+    bottom: 0;
   }
 }
 
@@ -489,10 +501,25 @@ a[href="https://froala.com/wysiwyg-editor"], a[href="https://www.froala.com/wysi
   }
 }
 
+.fadeIn {
+  animation-name: fadeIn;
+  animation-fill-mode: both;
+  animation-duration: 2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .slideInDown {
   animation-name: slideInDown;
   animation-duration: 0.3s;
-  animation-fill-mode: both;
 }
 
 @keyframes slideInDown {
