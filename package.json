@@ -4,7 +4,7 @@
     "dev": "NODE_ENV=development node server.js",
     "start": "next build && NODE_ENV=production node server.js",
     "build": "next build",
-    "export": "NODE_ENV=production next build && NODE_ENV=production next export"
+    "export": "NODE_ENV=production next build && NODE_ENV=production next export && cp out/404/index.html out/404.html && cp static/_redirects out/"
   },
   "dependencies": {
     "axios": "^0.18.0",
