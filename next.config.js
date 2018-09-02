@@ -23,7 +23,8 @@ module.exports = {
       "/login": { page: "/login" },
       "/profile": { page: "/profile" },
       "/posts": { page: "/posts" },
-      "/createpost": { page: "/createpost" }
+      "/createpost": { page: "/createpost" },
+      "/404": { page: "/_error" }
     };
     let paths = await axios
       .get(config.baseURL + "/post")
