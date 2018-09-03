@@ -1,0 +1,265 @@
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto Mono"), local("RobotoMono-Regular"),
+    url(/static/roboto.woff2) format("woff2");
+}
+
+.terminal,
+code {
+  font-size: 14px;
+}
+
+.terminal {
+  position: relative;
+  padding: 1rem;
+  font-family: Menlo, Roboto Mono, Courier New, monospace;
+  border: 1px solid #d8d9da;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  padding-top: 45px;
+  margin: 2rem 0;
+}
+
+.terminal:before {
+  content: "\2022 \2022 \2022";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  background: #e1e1e1;
+  color: #c2c3c4;
+  width: 100%;
+  font-size: 2.5rem;
+  margin: 0;
+  line-height: 0;
+  padding: 14px 0;
+  text-indent: 4px;
+  letter-spacing: -3px;
+}
+
+pre .terminal {
+  overflow: hidden;
+}
+
+code[class*="language-"],
+pre[class*="language-"],
+pre code {
+  color: #d5d5d5;
+  font-family: Menlo, Roboto Mono, Courier New, monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.6;
+  font-weight: 400;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  border-radius: 0;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.terminal,
+pre code {
+  margin: 0 0 2rem;
+}
+
+pre code {
+  display: block;
+  padding: 1rem;
+  overflow: auto;
+  background-color: #333;
+  box-shadow: 2px 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 700px) {
+  pre code {
+    padding: 1.5rem;
+  }
+}
+
+kbd {
+  background-color: #f7f7f7;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px #fff;
+  color: #333;
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  margin: 0 0.1em;
+  padding: 0.1em 0.6em;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 14px;
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 2px 4px;
+  background: #333;
+  border: 1px solid #333;
+}
+
+:not(pre) > code {
+  padding: 2px 4px;
+  border: 0;
+  font-family: Menlo, Roboto Mono, Courier New, monospace;
+  font-weight: 400;
+  color: #222;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+code[class*="language-css"],
+code[class*="language-less"],
+code[class*="language-sass"],
+code[class*="language-scss"] {
+  color: #c9c;
+}
+
+.filename {
+  font-family: Nunito Sans, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, Helvetica, Arial, sans-serif;
+  background: #111;
+  padding: 0.5rem 1rem 0.75rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 700;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.token.doctype {
+  background: #000;
+  color: #fff;
+}
+
+.token.cdata,
+.token.comment,
+.token.prolog {
+  color: #8a8a80;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.attr-value,
+.token.string {
+  color: #9c9;
+}
+
+.token.punctuation {
+  color: #d2d0c9;
+}
+
+.token.operator {
+  color: #cda869;
+}
+
+.token.variable {
+  color: #f2777a;
+}
+
+.token.property {
+  color: #d2d0c9;
+}
+
+.token.boolean,
+.token.constant,
+.token.entity,
+.token.inserted,
+.token.number,
+.token.regex,
+.token.symbol,
+.token.url {
+  color: #fca369;
+}
+
+.token.delimiter {
+  background: #000;
+  color: #fff;
+  padding: 1px 2px;
+}
+
+.token.atrule {
+  color: #76d4d6;
+}
+
+.token.keyword {
+  color: #ffeead;
+}
+
+.language-autohotkey .token.selector {
+  color: #f7931e;
+}
+
+.token.attr-name {
+  color: #ffd479;
+}
+
+.token.function {
+  color: #76d4d6;
+}
+
+.language-php .token.function {
+  color: #fff;
+}
+
+.token.class-name {
+  color: #d6acd6;
+}
+
+.language-autohotkey .token.tag,
+.token.deleted {
+  color: #f5b80e;
+}
+
+.token.tag {
+  color: #78aad6;
+}
+
+.language-autohotkey .token.keyword {
+  color: #ffeead;
+}
+
+.token.selector {
+  color: #ffd479;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+code::-moz-selection,
+pre::-moz-selection {
+  text-shadow: none;
+  color: inherit;
+  background: hsla(0, 0%, 59%, 0.3) !important;
+}
+
+code::selection,
+pre::selection {
+  text-shadow: none;
+  color: inherit;
+  background: hsla(0, 0%, 59%, 0.3) !important;
+}
+
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"]::-moz-selection {
+  text-shadow: none;
+  color: inherit;
+  background: hsla(0, 0%, 59%, 0.3) !important;
+}
+
+code[class*="language-"] ::selection,
+pre[class*="language-"]::selection {
+  text-shadow: none;
+  color: inherit;
+  background: hsla(0, 0%, 59%, 0.3) !important;
+}

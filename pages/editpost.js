@@ -23,6 +23,7 @@ import NextHead from "next/head";
 import dynamic from "next/dynamic";
 import $ from "jquery";
 import "froala-editor/js/froala_editor.pkgd.min.js";
+import Prism from "../components/ViewPost/prism";
 if (typeof window !== "undefined") {
   window.$ = window.jQuery = $;
 }
@@ -298,6 +299,46 @@ export class EditPost extends Component {
     });
   };
 
+  transformCodeBlocks = content => {
+    if (content) {
+      let codeBlocks = content.match(/<p class="srcCode".*?>.*?<\/p>/gs);
+      for (let index in codeBlocks) {
+        let codeBlock = codeBlocks[index];
+        let parts = /^<p[\s]*class="srcCode"[\s]*data="(.*?)"[\s]*type="(.*?)">.*?<\/p>$/gs.exec(
+          codeBlock
+        );
+        if (parts != null) {
+          codeBlock = parts[1];
+          let type = parts[2];
+          codeBlock = codeBlock
+            .replace(/^<p.*?>/gs, "")
+            .replace(/<\/p>$/gs, "");
+          let codeBlockHtml = Prism.highlight(codeBlock, Prism.languages[type]);
+          codeBlock =
+            '<pre><code class="language-' +
+            type +
+            '">' +
+            codeBlockHtml +
+            "</code></pre>";
+        } else {
+          // prettier-ignore-next-statement
+          codeBlock = `
+<pre class="line-numbers"><code class="language-scss">
+<span class="token variable">Error Occured</span>
+<br><span class="token keyword">The format for Code Snippet is </span>
+<br><span class="token function">&lt;p class="srcCode" data="Code here" type="Type of Code"&gt;
+Placeholder Name
+&lt;/p&gt; </span> 
+</code></pre>`;
+        }
+        content = content.replace(codeBlocks[index], codeBlock);
+        return content;
+      }
+    } else {
+      return content;
+    }
+  };
+
   savePostHandler = () => {
     this.setState({
       savingPost: true
@@ -348,6 +389,7 @@ export class EditPost extends Component {
             rel="stylesheet"
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
+          <link rel="stylesheet" href="/static/codeView.css" />
           <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
         </NextHead>
         {Store && Store.isAuth ? (
@@ -398,7 +440,9 @@ export class EditPost extends Component {
                   <Divider horizontal>Output</Divider>
                   <div
                     className="fr-view"
-                    dangerouslySetInnerHTML={{ __html: this.state.content }}
+                    dangerouslySetInnerHTML={{
+                      __html: this.transformCodeBlocks(this.state.content)
+                    }}
                   />
                 </Grid.Column>
                 <Grid.Column tablet={2} computer={3} only="computer tablet" />
