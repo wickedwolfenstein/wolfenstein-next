@@ -44,14 +44,9 @@ export class Layout extends Component {
             color="#49B882"
           />
           <link rel="icon" href="/static/favicon.ico" />
+          <link rel="stylesheet" href="/static/App.css" />
           <link
-            rel="preload"
-            as="style"
-            onload="this.rel='stylesheet'"
-            href="/static/App.css"
-          />
-          <link
-            onload="this.rel='stylesheet'"
+            rel="stylesheet"
             href="/static/assets/semantic-ui-css/semantic.min.css"
           />
         </NextHead>

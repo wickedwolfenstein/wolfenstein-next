@@ -93,17 +93,10 @@ Placeholder Name
       >
         <NextHead>
           <link
-            rel="preload"
-            as="style"
-            onload="this.rel='stylesheet'"
+            rel="stylesheet"
             href="/static/assets/font-awesome/css/font-awesome.css"
           />
-          <link
-            rel="preload"
-            as="style"
-            onload="this.rel='stylesheet'"
-            href="/static/codeView.css"
-          />
+          <link rel="stylesheet" href="/static/codeView.css" />
         </NextHead>
         <Dimmer active={!props}>
           <Loader active={!props} size="huge" inline="centered">
