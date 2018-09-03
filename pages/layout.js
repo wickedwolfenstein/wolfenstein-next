@@ -51,8 +51,6 @@ export class Layout extends Component {
             href="/static/App.css"
           />
           <link
-            rel="preload"
-            as="style"
             onload="this.rel='stylesheet'"
             href="/static/assets/semantic-ui-css/semantic.min.css"
           />
