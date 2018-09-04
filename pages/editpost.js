@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Layout from "./layout";
 let Store = null;
+import { transformCodeBlocks } from "../components/utils/transformCodeBlocks";
 import { initUserStore } from "../Store/userStore";
 import {
   Button,
@@ -23,7 +24,6 @@ import NextHead from "next/head";
 import dynamic from "next/dynamic";
 import $ from "jquery";
 import "froala-editor/js/froala_editor.pkgd.min.js";
-import Prism from "../components/ViewPost/prism";
 if (typeof window !== "undefined") {
   window.$ = window.jQuery = $;
 }
@@ -298,47 +298,6 @@ export class EditPost extends Component {
       copyCardImageToHero: !this.state.copyCardImageToHero
     });
   };
-
-  transformCodeBlocks = content => {
-    if (content) {
-      let codeBlocks = content.match(/<p class="srcCode".*?>.*?<\/p>/gs);
-      for (let index in codeBlocks) {
-        let codeBlock = codeBlocks[index];
-        let parts = /^<p[\s]*class="srcCode"[\s]*data="(.*?)"[\s]*type="(.*?)">.*?<\/p>$/gs.exec(
-          codeBlock
-        );
-        if (parts != null) {
-          codeBlock = parts[1];
-          let type = parts[2];
-          codeBlock = codeBlock
-            .replace(/^<p.*?>/gs, "")
-            .replace(/<\/p>$/gs, "");
-          let codeBlockHtml = Prism.highlight(codeBlock, Prism.languages[type]);
-          codeBlock =
-            '<pre><code class="language-' +
-            type +
-            '">' +
-            codeBlockHtml +
-            "</code></pre>";
-        } else {
-          // prettier-ignore-next-statement
-          codeBlock = `
-<pre class="line-numbers"><code class="language-scss">
-<span class="token variable">Error Occured</span>
-<br><span class="token keyword">The format for Code Snippet is </span>
-<br><span class="token function">&lt;p class="srcCode" data="Code here" type="Type of Code"&gt;
-Placeholder Name
-&lt;/p&gt; </span> 
-</code></pre>`;
-        }
-        content = content.replace(codeBlocks[index], codeBlock);
-        return content;
-      }
-    } else {
-      return content;
-    }
-  };
-
   savePostHandler = () => {
     this.setState({
       savingPost: true
@@ -441,7 +400,7 @@ Placeholder Name
                   <div
                     className="fr-view"
                     dangerouslySetInnerHTML={{
-                      __html: this.transformCodeBlocks(this.state.content)
+                      __html: transformCodeBlocks(this.state.content)
                     }}
                   />
                 </Grid.Column>

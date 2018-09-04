@@ -15,13 +15,17 @@ export class HomePage extends Component {
     return (
       <Layout>
         <Head
-          title={"Wickedity | Login"}
-          metaTitle={"Wickedity | Login"}
-          metaKeywords={"wickedity,login"}
+          title={"Wickedity"}
+          metaTitle={"Wickedity"}
+          metaKeywords={"wickedity, technology, crazy"}
           url={typeof window !== "undefined" ? window.location.href : ""}
-          metaDescription={"Login to start posting on this site."}
-          orgTitle={"Wickedity | Login"}
-          orgDescription={"Login to start posting on this site."}
+          metaDescription={
+            "On Wickedity, you can find some wicked ideas to ponder upon"
+          }
+          orgTitle={"Wickedity"}
+          orgDescription={
+            "On Wickedity, you can find some wicked ideas to ponder upon"
+          }
         />
         <Banner2
           className={"wolf"}

@@ -1,0 +1,26 @@
+<p><span style="font-size: 36px;">M</span>onitoring Crypto markets day in and day out is a tedious task, so I came up with an idea to create a bot using <span style="background-color: rgb(247, 218, 100);">Node js and Express</span>, which does all the scanning/monitoring for me and notifies me via Twitter when whatever condition I have specified is met.</p>
+
+<p>The bot has its own private <span style="background-color: rgb(247, 218, 100);">Twitter</span> account, and we follow the bot&#39;s twitter account and have push notifications enabled to get notified about the market immediately&nbsp;</p>
+
+<p>&nbsp;<span class="fr-img-caption fr-fic fr-dib" style="width: 163px;"><span class="fr-img-wrap"><img src="blob:http://localhost:3000/0e051deb-0b9e-459b-8d03-228f192c574d" alt="Crypto Bot with Twitter"><span class="fr-inner">This is our Crypto Bot</span></span>&nbsp;</span>
+</p>
+
+<p>So, lets get started !!</p>
+
+<p>You will need the tool/s mentioned below.</p>
+
+<ol>
+	<li><span style="font-size: 24px; background-color: rgb(247, 218, 100);">Node.js</span></li>
+</ol>
+
+<p>
+	<br>
+</p>
+
+<p>1. Install <span style="background-color: rgb(247, 218, 100);">Node.js</span> and <span style="background-color: rgb(247, 218, 100);">NPM&nbsp;</span>will get installed along with it.</p>
+
+<p>2. Get you project setup by using <span style="font-size: 24px; background-color: rgb(247, 218, 100);">npm init</span><span style="font-size: 24px;">&nbsp;.</span></p>
+
+<p>
+	<br>
+</p>
