@@ -43,7 +43,7 @@ export const ViewPost = props => {
       let codeBlocks = content.match(/<p class="srcCode".*?>.*?<\/p>/gs);
       for (let index in codeBlocks) {
         let codeBlock = codeBlocks[index];
-        let parts = /^<p[\s]*class="srcCode"[\s]*data="(.*?)"[\s]*type="(.*?)">.*?<\/p>$/gs.exec(
+        let parts = /^<p[\s]*class="srcCode"[\s]*data="(.*?)"[\s]*data-host="(.*?)"[\s]*data-user="(.*?)"[\s]*type="(.*?)">.*?<\/p>$|^<p[\s]*class="srcCode"[\s]*data="(.*?)"[\s]*type="(.*?)">.*?<\/p>$/gs.exec(
           codeBlock
         );
         if (parts != null) {
