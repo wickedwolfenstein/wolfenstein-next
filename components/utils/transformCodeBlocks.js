@@ -17,6 +17,7 @@ export const transformCodeBlocks = content => {
         );
         codeBlock = parts[1];
         type = parts[2];
+        codeBlock = codeBlock.replace(/\^'/gs, '"');
         codeBlock = codeBlock.replace(/^<p.*?>/gs, "").replace(/<\/p>$/gs, "");
         let codeBlockHtml = Prism.highlight(codeBlock, Prism.languages[type]);
         codeBlock =
