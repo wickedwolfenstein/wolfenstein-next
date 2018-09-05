@@ -26,7 +26,7 @@ class UserStore {
       } else {
         setAuthToken(localStorage.jwtToken);
         this.setCurrentUser(decoded);
-        this.refreshToken(3600 * 1000);
+        this.refreshToken(3000 * 1000);
       }
     }
   }

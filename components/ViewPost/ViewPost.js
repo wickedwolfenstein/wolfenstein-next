@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import NextHead from "next/head";
 import Image from "../ErrorProofImage/ErrorProofImage";
 import OnVisible from "react-on-visible";
-import Prism from "./prism";
 import { transformCodeBlocks } from "../utils/transformCodeBlocks";
 import {
   FacebookShareButton,

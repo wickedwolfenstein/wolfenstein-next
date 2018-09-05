@@ -1,3 +1,5 @@
+import Prism from "./prism";
+
 export const transformCodeBlocks = content => {
   if (content) {
     let codeBlocks = content.match(/<p class="srcCode".*?>.*?<\/p>/gs);

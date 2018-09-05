@@ -324,6 +324,7 @@ export class EditPost extends Component {
   };
 
   render() {
+    let viewPostContent = this.state.content;
     let cate = null;
     if (this.state.category && this.state.category !== "") {
       let catObj = this.state.categories.filter(item => {
@@ -400,7 +401,7 @@ export class EditPost extends Component {
                   <div
                     className="fr-view"
                     dangerouslySetInnerHTML={{
-                      __html: transformCodeBlocks(this.state.content)
+                      __html: transformCodeBlocks(viewPostContent)
                     }}
                   />
                 </Grid.Column>
