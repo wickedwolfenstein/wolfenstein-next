@@ -2,6 +2,7 @@ import React from "react";
 import axios from "../config/Axios/axios";
 import Layout from "./layout";
 import RelatedPosts from "../components/RelatedPosts/RelatedPosts";
+import config from "../config/backendUrl";
 import Head from "../components/head";
 import NextHead from "next/head";
 import Post from "../components/ViewPost/ViewPost";
@@ -24,7 +25,10 @@ export class ViewPost extends React.Component {
           title={this.props.post.title}
           metaTitle={this.props.post.title}
           metaKeywords={this.props.post.keywords}
-          url={typeof window !== "undefined" ? window.location.href : ""}
+          url={
+            config.serverUrl + this.props.post.pageURL ||
+            (typeof window !== "undefined" ? window.location.href : "")
+          }
           metaDescription={this.props.post.card.description}
           orgTitle={this.props.post.title}
           orgDescription={this.props.post.card.description}
