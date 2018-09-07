@@ -2,10 +2,11 @@ import React, { Component, Fragment } from "react";
 import { Segment, Card, Divider, Icon } from "semantic-ui-react";
 import Image from "../ErrorProofImage/ErrorProofImage";
 import api from "../../config/Axios/axios";
-import Link from "../../routes";
+import Router from "next/router";
+import Link from "next/link";
 export class RelatedPosts extends Component {
   state = {
-    posts: []
+    posts: ""
   };
 
   componentDidMount() {
@@ -16,17 +17,17 @@ export class RelatedPosts extends Component {
           if (res.status === 404) {
             console.log("Posts Not Found");
           } else {
-            let posts = res.data.filter(
+            let postsRes = res.data.filter(
               item => item._id !== this.props.currPostID
             );
-            this.setState({ posts: posts });
+            if (this.state.posts.length <= 0) {
+              this.setState({ posts: [...postsRes] });
+            }
           }
         })
         .catch(err => {
-          const { history } = this.props;
-          history.push({
-            pathname: "/500"
-          });
+          //Router.pushRoute("/500");
+          console.log(err);
         });
     }
   }

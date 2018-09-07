@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "../config/Axios/axios";
 import Layout from "./layout";
-import Header from "../components/Header/Header";
+import RelatedPosts from "../components/RelatedPosts/RelatedPosts";
 import Head from "../components/head";
 import Post from "../components/ViewPost/ViewPost";
 export class ViewPost extends React.Component {
@@ -23,6 +23,10 @@ export class ViewPost extends React.Component {
           orgDescription={this.props.post.card.description}
         />
         <Post post={this.props.post} />
+        <RelatedPosts
+          category={this.props.post.category}
+          currPostID={this.props.post._id}
+        />
       </Layout>
     );
   }
