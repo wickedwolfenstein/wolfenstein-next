@@ -3,6 +3,7 @@ import axios from "../config/Axios/axios";
 import Layout from "./layout";
 import RelatedPosts from "../components/RelatedPosts/RelatedPosts";
 import Head from "../components/head";
+import NextHead from "next/head";
 import Post from "../components/ViewPost/ViewPost";
 export class ViewPost extends React.Component {
   static async getInitialProps({ query }) {
@@ -13,6 +14,12 @@ export class ViewPost extends React.Component {
   render() {
     return (
       <Layout>
+        <NextHead>
+          <link
+            rel="stylesheet"
+            href="/static/assets/froala-editor/css/froala_style.min.css"
+          />
+        </NextHead>
         <Head
           title={this.props.post.title}
           metaTitle={this.props.post.title}
