@@ -25,10 +25,6 @@ import $ from "jquery";
 import "froala-editor/js/froala_editor.pkgd.min.js";
 import Router from "next/router";
 let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
-if (typeof window !== "undefined") {
-  window.$ = window.jQuery = $;
-  //FroalaEditor = require("react-froala-wysiwyg");
-}
 
 import { withRouter } from "next/router";
 export class CreatePost extends Component {
@@ -352,7 +348,6 @@ export class CreatePost extends Component {
             rel="stylesheet"
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
-          <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
         </NextHead>
         {Store && Store.isAuth ? (
           <Fragment>

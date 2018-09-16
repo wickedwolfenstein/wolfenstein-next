@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import $ from "jquery";
 import Layout from "./layout";
 let Store = null;
 import { transformCodeBlocks } from "../components/utils/transformCodeBlocks";
@@ -22,16 +23,13 @@ import {
 import api from "../config/Axios/axios";
 import NextHead from "next/head";
 import dynamic from "next/dynamic";
-import $ from "jquery";
-import "froala-editor/js/froala_editor.pkgd.min.js";
-if (typeof window !== "undefined") {
-  window.$ = window.jQuery = $;
-}
 
 import Router from "next/router";
 let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
+require("froala-editor/js/froala_editor.pkgd.min.js");
 
 import { withRouter } from "next/router";
+import { type } from "os";
 export class EditPost extends Component {
   constructor(props) {
     super(props);
@@ -350,7 +348,6 @@ export class EditPost extends Component {
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
           <link rel="stylesheet" href="/static/codeView.css" />
-          <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
         </NextHead>
         {Store && Store.isAuth ? (
           <Fragment>
