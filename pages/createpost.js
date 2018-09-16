@@ -22,7 +22,6 @@ import api from "../config/Axios/axios";
 import NextHead from "next/head";
 import dynamic from "next/dynamic";
 import $ from "jquery";
-import "froala-editor/js/froala_editor.pkgd.min.js";
 import Router from "next/router";
 let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
 if (typeof window !== "undefined") {
