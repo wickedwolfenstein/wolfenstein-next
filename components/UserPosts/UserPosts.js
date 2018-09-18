@@ -8,6 +8,7 @@ import {
   Modal,
   Icon
 } from "semantic-ui-react";
+import Router from "next/router";
 import { withRouter } from "next/router";
 import { initUserStore } from "../../Store/userStore";
 import axios from "../../config/Axios/axios";
@@ -39,7 +40,8 @@ export class UserPosts extends Component {
 
   editPost = id => {
     if (id && id !== "") {
-      this.props.router.push("/editpost/" + id);
+      Router.prefetch("/editpost/" + id);
+      Router.pushRoute("/editpost/" + id);
     }
   };
 

@@ -22,7 +22,6 @@ import api from "../config/Axios/axios";
 import NextHead from "next/head";
 import dynamic from "next/dynamic";
 import $ from "jquery";
-import "froala-editor/js/froala_editor.pkgd.min.js";
 import Router from "next/router";
 let FroalaEditor = dynamic(import("react-froala-wysiwyg"));
 if (typeof window !== "undefined") {
@@ -352,7 +351,11 @@ export class CreatePost extends Component {
             rel="stylesheet"
             href="/static/assets/froala-editor/css/froala_editor.pkgd.min.css"
           />
-          <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
+          {typeof window !== "undefined" && $ !== undefined ? (
+            <script src="/static/assets/froala-editor/js/froala_editor.pkgd.min.js" />
+          ) : (
+            ""
+          )}
         </NextHead>
         {Store && Store.isAuth ? (
           <Fragment>

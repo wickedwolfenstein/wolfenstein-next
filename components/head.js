@@ -20,6 +20,7 @@ const Head = props => (
     {props.metaDescription && (
       <meta name="description" content={props.metaDescription} />
     )}
+    {props.url && <link rel="canonical" href={props.url} />}
     <meta property="og:url" content={props.url || defaultOGURL} />
     <meta property="og:title" content={props.title || ""} />
     <meta

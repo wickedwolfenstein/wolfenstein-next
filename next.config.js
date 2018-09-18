@@ -40,17 +40,18 @@ module.exports = {
           });
           return Obj;
         }, {});
-        let editPosts = data.data.reduce((acc, curr) => {
-          let postid = curr._id;
-          let Obj = Object.assign(acc, {
-            [`/editpost/${postid}`]: {
-              page: "/editpost",
-              query: { postId: postid }
-            }
-          });
-          return Obj;
-        }, {});
-        return { ...pages, ...posts, ...editPosts };
+        // let editPosts = data.data.reduce((acc, curr) => {
+        //   let postid = curr._id;
+        //   let Obj = Object.assign(acc, {
+        //     [`/editpost/${postid}`]: {
+        //       page: "/editpost",
+        //       query: { postId: postid }
+        //     }
+        //   });
+        //   return Obj;
+        // }, {});
+        //return { ...pages, ...posts, ...editPosts };
+        return { ...pages, ...posts };
       });
     return paths;
   }
