@@ -16,7 +16,7 @@ class ThemeStore {
     RED: "rgba(255, 71, 26, .8)"
   };
   BG = {
-    BLUE: "cat1.png",
+    BLUE: "cat1_gzip.png",
     RED: "Wickedity.png"
   };
   // BG = {

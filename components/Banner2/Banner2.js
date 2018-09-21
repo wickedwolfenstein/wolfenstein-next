@@ -236,7 +236,7 @@ export class Banner2 extends Component {
             src={
               Store && !Store.themeToggle
                 ? "/static/assets/Wickedity.png"
-                : "/static/assets/cat1.png"
+                : "/static/assets/cat1_gzip.png"
             }
             className={this.props.className}
             alt={this.props.altText}
