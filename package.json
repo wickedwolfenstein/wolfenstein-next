@@ -7,7 +7,7 @@
     "startwin": "next build && set NODE_ENV=production node server.js",
     "build": "next build",
     "exportonly": "next export",
-    "export": "NODE_ENV=production next build && NODE_ENV=production next export && NODE_ENV=production node bin/bundle && cp out/404/index.html out/404.html && cp static/_redirects out/ && node bin/sitemap",
+    "export": "NODE_ENV=production next build && NODE_ENV=production next export && NODE_ENV=production node bin/bundle && node bin/sitemap && cp out/404/index.html out/404.html && cp static/_redirects out/",
     "exportwin": "set NODE_ENV=development& next build && next export &&node bin/bundle"
   },
   "dependencies": {

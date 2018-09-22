@@ -24,9 +24,10 @@ diskPages.forEach(page => {
     "0" +
     (modDate.getMonth() + 1)
   ).slice(-2)}-${("0" + modDate.getDate()).slice(-2)}`;
-  console.log(page);
-  page = page.replace(path.join(__dirname, "..", "pages"), "");
+  page = page.replace(path.join(__dirname, "..", "out"), "");
   page = page.replace(/index.html$/, "");
+  page = page.replace(/^\/$/, "");
+  console.log(page);
   page = `${SITE_ROOT}${page}`;
 
   if (page.match(/.*\/index$/)) {
