@@ -39,8 +39,8 @@ p {
 .ui.grid {
   margin-top: 0;
   margin-bottom: 0rem;
-  margin-left: 0rem !important;
-  margin-right: 0rem !important;
+  /* margin-left: 0rem !important;
+  margin-right: 0rem !important; */
 }
 svg.placeholder {
   width: 100%;
