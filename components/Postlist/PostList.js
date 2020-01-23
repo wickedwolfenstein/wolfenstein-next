@@ -95,29 +95,30 @@ export const Postlist = props => {
                         }
                         percent={1}
                       >
-                        <Link href={postUrl}>
+                        <a href={postUrl}>
                           <a className="anchor-clickable" />
-                        </Link>
-                        <Card centered>
-                          <ErrorProofImage src={post.card.cardImage} />
-                          <Card.Content>
-                            <Card.Header>{post.card.headerText}</Card.Header>
-                            <Card.Meta>
-                              <span className={post.card.subheaderClass}>
-                                {post.card.subheaderText}
-                              </span>
-                            </Card.Meta>
-                            <Card.Description>
-                              {post.card.description}
-                            </Card.Description>
-                          </Card.Content>
-                          <Card.Content extra>
-                            <a>
-                              <Icon name={post.card.extraInfoIcon} />
-                              {post.card.extraInfo}
-                            </a>
-                          </Card.Content>
-                        </Card>
+
+                          <Card centered>
+                            <ErrorProofImage src={post.card.cardImage} />
+                            <Card.Content>
+                              <Card.Header>{post.card.headerText}</Card.Header>
+                              <Card.Meta>
+                                <span className={post.card.subheaderClass}>
+                                  {post.card.subheaderText}
+                                </span>
+                              </Card.Meta>
+                              <Card.Description>
+                                {post.card.description}
+                              </Card.Description>
+                            </Card.Content>
+                            <Card.Content extra>
+                              <a>
+                                <Icon name={post.card.extraInfoIcon} />
+                                {post.card.extraInfo}
+                              </a>
+                            </Card.Content>
+                          </Card>
+                        </a>
                       </OnVisible>
                     </Grid.Column>
                   );

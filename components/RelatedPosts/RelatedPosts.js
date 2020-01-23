@@ -38,25 +38,26 @@ export class RelatedPosts extends Component {
       relatedPostsDOM = this.state.posts.slice(0, 3).map(post => {
         return (
           <Card raised key={post._id} className={"clickable centerAlign"}>
-            <Link href={post.pageURL ? post.pageURL : "/"}>
+            <a href={post.pageURL ? post.pageURL : "/"}>
               <a className={"anchor-clickable"} />
-            </Link>
-            <Image src={post.card.cardImage} />
-            <Card.Content>
-              <Card.Header>{post.card.headerText}</Card.Header>
-              <Card.Meta>
-                <span className={post.card.subheaderClass}>
-                  {post.card.subheaderText}
-                </span>
-              </Card.Meta>
-              <Card.Description>{post.card.description}</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name={post.card.extraInfoIcon} />
-                {post.card.extraInfo}
-              </a>
-            </Card.Content>
+
+              <Image src={post.card.cardImage} />
+              <Card.Content>
+                <Card.Header>{post.card.headerText}</Card.Header>
+                <Card.Meta>
+                  <span className={post.card.subheaderClass}>
+                    {post.card.subheaderText}
+                  </span>
+                </Card.Meta>
+                <Card.Description>{post.card.description}</Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <a>
+                  <Icon name={post.card.extraInfoIcon} />
+                  {post.card.extraInfo}
+                </a>
+              </Card.Content>
+            </a>
           </Card>
         );
       });
