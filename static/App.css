@@ -241,12 +241,12 @@ div.clickable .anchor-clickable {
   }
 }
 .come-in-odd {
-  transform: translateY(150px) !important;
-  animation: come-in 0.8s ease forwards !important;
+  transform: translateY(150px);
+  animation: come-in 0.8s ease forwards;
 }
 .come-in-even {
-  transform: translateY(150px) !important;
-  animation: come-in 0.6s ease forwards !important;
+  transform: translateY(150px);
+  animation: come-in 0.6s ease forwards;
 }
 .already-visible {
   transform: translateY(0) !important;
